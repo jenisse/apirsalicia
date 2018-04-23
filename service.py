@@ -44,9 +44,10 @@ class Service:
         
         
 if __name__ == '__main__':
-    
+    print("ANTES")
     servicio=Service()
     servicio.run()
+    print("HOLA")
 
 
 
