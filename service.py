@@ -41,6 +41,11 @@ class Service:
         
     def run(self):
         self.app.run(port=5002)
+        
+        
+        
+servicio=Service()
+servicio.run()
 
 
 
