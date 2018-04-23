@@ -69,3 +69,5 @@ wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.14.1
 psycopg2
+flask_script
+flask_migrate
