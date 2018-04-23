@@ -3,6 +3,7 @@ from flask_restful import Resource, Api
 from flask.ext.jsonpify import jsonify
 from sqlalchemy import create_engine
 import os
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
