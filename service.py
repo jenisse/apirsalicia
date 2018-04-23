@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 import os
 
 app = Flask(__name__)
+db = SQLAlchemy(app)
 
 @app.route('/recomendaciones/<dato>')
 def recommendations(dato):
