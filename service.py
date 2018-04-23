@@ -6,6 +6,7 @@ import os
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
+app.config['DATABASE_URI'] = 'postgres://dhkuugcsguuvmc:72aae72895616c0a4afcb2fbc3ffdb9da9d5cf6a33373d3ed93b1490d32183b1@ec2-54-243-213-188.compute-1.amazonaws.com:5432/d1i8j5vuaca7m0'
 
 @app.route('/recomendaciones/<dato>')
 def recommendations(dato):
