@@ -43,9 +43,10 @@ class Service:
         self.app.run(port=5002)
         
         
-        
-servicio=Service()
-servicio.run()
+if __name__ == '__main__':
+    
+    servicio=Service()
+    servicio.run()
 
 
 
