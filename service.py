@@ -7,7 +7,7 @@ from sqlalchemy import create_engine
 
 class Recommendations(Resource):
     def get(self, dato):
-        db_connect = create_engine('sqlite:///prueba.db')
+        db_connect = create_engine('postgres://dhkuugcsguuvmc:72aae72895616c0a4afcb2fbc3ffdb9da9d5cf6a33373d3ed93b1490d32183b1@ec2-54-243-213-188.compute-1.amazonaws.com:5432/d1i8j5vuaca7m0')
         conn = db_connect.connect()
         rese_id ='id_investigador='+str(dato)
         query=conn.execute( """select Similar_Orcid.title, Similar_Orcid.similarity_percentage, Publicacion_Alicia.url, Publicacion_Alicia.title as titulo_alicia from Similar_Orcid  INNER JOIN Publicacion_Alicia on Similar_Orcid.identifier=Publicacion_Alicia.identifier where link_dina like ('%' || ? || '%')""", (rese_id,))
@@ -15,7 +15,7 @@ class Recommendations(Resource):
         return jsonify(result)
 class RandomRecommendation(Resource):
     def get(self, dato):
-        db_connect = create_engine('sqlite:///prueba.db')
+        db_connect = create_engine('postgres://dhkuugcsguuvmc:72aae72895616c0a4afcb2fbc3ffdb9da9d5cf6a33373d3ed93b1490d32183b1@ec2-54-243-213-188.compute-1.amazonaws.com:5432/d1i8j5vuaca7m0')
         conn = db_connect.connect()
         rese_id ='id_investigador='+str(dato)
         query=conn.execute( """select Similar_Orcid.title, Similar_Orcid.similarity_percentage, Publicacion_Alicia.url, Publicacion_Alicia.title as titulo_alicia from Similar_Orcid  INNER JOIN Publicacion_Alicia on Similar_Orcid.identifier=Publicacion_Alicia.identifier where link_dina like ('%' || ? || '%') ORDER BY RANDOM() LIMIT 1""", (rese_id,))
@@ -41,6 +41,10 @@ class Service:
         
     def run(self):
         self.app.run(port=5002)
+
+if __name__ == '__main__':
+    servicio=Service()
+    servicio.run()
 
 
 
