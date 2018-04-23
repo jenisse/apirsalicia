@@ -43,11 +43,11 @@ class Service:
         self.app.run(port=5002)
         
         
-
-print("ANTES")
-servicio=Service()
-servicio.run()
-print("HOLA")
+if __name__ == '__main__':
+    print("ANTES")
+    servicio=Service()
+    servicio.run()
+    print("HOLA")
 
 
 
