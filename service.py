@@ -11,7 +11,7 @@ app = Flask(__name__)
 db = SQLAlchemy(app)
 app.config['DATABASE_URI'] = 'postgres://aaiekzlymkmulx:688099ba64af630040260c2d81a5354098b4773ca07fb0163d49ee36928fa342@ec2-50-16-196-238.compute-1.amazonaws.com:5432/de925n6fc4qpge'
 
-@app.route('/recomendaciones/<dato>')
+@app.route('/recomendaciones/<dato>', methods=['GET'])
 def recommendations(dato):
     db_connect = create_engine('postgres://aaiekzlymkmulx:688099ba64af630040260c2d81a5354098b4773ca07fb0163d49ee36928fa342@ec2-50-16-196-238.compute-1.amazonaws.com:5432/de925n6fc4qpge')
     conn = db_connect.connect()
@@ -21,9 +21,9 @@ def recommendations(dato):
     query = conn.execute(stmt,x=rese_id)
     #query=conn.execute('select * from "Investigador"')
     result = {'recommendations': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-    return jsonify(result),{'Body': jsonify(result)},{'Content-Type': 'application/json'}
+    return jsonify(result),{'Content-Type': 'application/json'}
 
-@app.route('/recomendacion_aleatoria/<dato>') 
+@app.route('/recomendacion_aleatoria/<dato>',methods=['GET']) 
 def randomRecommendation(dato):
     db_connect = create_engine('postgres://aaiekzlymkmulx:688099ba64af630040260c2d81a5354098b4773ca07fb0163d49ee36928fa342@ec2-50-16-196-238.compute-1.amazonaws.com:5432/de925n6fc4qpge')
     conn = db_connect.connect()
@@ -32,7 +32,7 @@ def randomRecommendation(dato):
     stmt = text("""SELECT so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%'|| :x) ORDER BY RANDOM() LIMIT 1""")
     query = conn.execute(stmt,x=rese_id)
     result = {'recommendation': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-    return jsonify(result),{'Body': jsonify(result)},{'Content-Type': 'application/json'}
+    return jsonify(result),{'Content-Type': 'application/json'} #{'Body': jsonify(result)},
 
 @app.route('/shutdown')        
 def shutdown():
