@@ -16,7 +16,7 @@ def recommendations(dato):
     conn = db_connect.connect()
     rese_id ='id_investigador='+str(dato)
     #query=conn.execute( """select so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%' || ? || '%')""", (rese_id,))
-    stmt = text("""SELECT so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%'|| :x)"""")
+    stmt = text("""SELECT so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%'|| :x)""")
     query = conn.execute(stmt,x=rese_id)
     #query=conn.execute('select * from "Investigador"')
     result = {'recommendations': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
