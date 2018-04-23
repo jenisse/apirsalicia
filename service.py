@@ -20,7 +20,7 @@ def recommendations(dato):
     query = conn.execute(stmt,x=rese_id)
     #query=conn.execute('select * from "Investigador"')
     result = {'recommendations': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-    return jsonify(result).data
+    return jsonify(result),{'Content-Type': 'application/json'}
 
 @app.route('/recomendacion_aleatoria/<dato>') 
 def randomRecommendation(dato):
@@ -31,7 +31,7 @@ def randomRecommendation(dato):
     stmt = text("""SELECT so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%'|| :x) ORDER BY RANDOM() LIMIT 1""")
     query = conn.execute(stmt,x=rese_id)
     result = {'recommendation': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
-    return jsonify(result).data
+    return jsonify(result),{'Content-Type': 'application/json'}
 
 @app.route('/shutdown')        
 def shutdown():
