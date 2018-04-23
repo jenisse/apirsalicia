@@ -68,4 +68,3 @@ urllib3==1.22
 wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.14.1
-gobject-introspection-1.0==1.46.0
