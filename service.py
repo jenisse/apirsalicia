@@ -15,7 +15,7 @@ def recommendations(dato):
     conn = db_connect.connect()
     rese_id ='id_investigador='+str(dato)
     #query=conn.execute( """select Similar_Orcid.title, Similar_Orcid.similarity_percentage, Publicacion_Alicia.url, Publicacion_Alicia.title as titulo_alicia from Similar_Orcid  INNER JOIN Publicacion_Alicia on Similar_Orcid.identifier=Publicacion_Alicia.identifier where link_dina like ('%' || ? || '%')""", (rese_id,))
-    query=conn.execute('select * from "Investigador')
+    query=conn.execute('select * from Investigador')
     result = {'recommendations': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
     return jsonify(result)
 
