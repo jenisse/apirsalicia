@@ -14,7 +14,7 @@ def recommendations(dato):
     db_connect = create_engine('postgres://aaiekzlymkmulx:688099ba64af630040260c2d81a5354098b4773ca07fb0163d49ee36928fa342@ec2-50-16-196-238.compute-1.amazonaws.com:5432/de925n6fc4qpge')
     conn = db_connect.connect()
     rese_id ='id_investigador='+str(dato)
-    query=conn.execute( 'select so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%' || ? || '%')', (rese_id,))
+    query=conn.execute( """select so.title, so.similarity_percentage, pa.url, pa.title as titulo_alicia FROM "Similar_Orcid" so  INNER JOIN "Publicacion_Alicia" pa ON so.identifier=pa.identifier where so.link_dina like ('%' || ? || '%')""", (rese_id,))
     #query=conn.execute('select * from "Investigador"')
     result = {'recommendations': [dict(zip(tuple (query.keys()) ,i)) for i in query.cursor]}
     return jsonify(result)
