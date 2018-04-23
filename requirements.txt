@@ -48,6 +48,7 @@ ptyprocess==0.5.2
 pycairo==1.16.3
 pycparser==2.18
 Pygments==2.2.0
+pygobject==3.28.2
 pyOpenSSL==17.5.0
 python-dateutil==2.6.1
 pytz==2018.4
@@ -68,4 +69,3 @@ urllib3==1.22
 wcwidth==0.1.7
 webencodings==0.5.1
 Werkzeug==0.14.1
-psycopg2
